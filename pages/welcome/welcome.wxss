@@ -28,3 +28,6 @@
     line-height: 80rpx;
     color: #ea5a3c;
 }
+page {
+     background-color: #ecc0a8;
+}

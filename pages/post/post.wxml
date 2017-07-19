@@ -1,0 +1,36 @@
+<view class="container">
+    <swiper vertical="{{true}}" circular="true" indicator-dots="true" indicator-active-color="#fff" autoplay="true"
+            interval="5000">
+        <swiper-item>
+            <image src="/images/post/post-1@text.jpg"></image>
+        </swiper-item>
+        <swiper-item>
+            <image src="/images/post/post-2@text.jpg"></image>
+        </swiper-item>
+        <swiper-item>
+            <image src="/images/post/post-3@text.jpg"></image>
+        </swiper-item>
+    </swiper>
+    <view class="post-container">
+        <view class="post-author-data">
+            <image src="/images/avatar/avatar-5.png"/>
+            <text>jan 28 2017</text>
+        </view>
+        <view class="post-data">
+
+            <text class="post-title">开启AI数据时代</text>
+            <image class="post-image" src="/images/post/post-4.jpg"/>
+            <text class="post-content">
+                近日，易观旗下的产品评估与对标分析工具——易观千帆，升级为A3算法。距据了解，A3算法加入了机器学习的方法，将有效提高易观千帆各项指标数据的准确度，能够更加精准地还原用户真实行为和客观评价产品价值。
+            </text>
+        </view>
+        <view class="post-like">
+            <image src="/images/icon/wx_app_collect.png"/>
+            <text>108</text>
+            <image src="/images/icon/wx_app_view.png"/>
+            <text>94</text>
+            <image src="/images/icon/wx_app_message.png"/>
+            <text>2</text>
+        </view>
+    </view>
+</view>
