@@ -29,5 +29,12 @@ Page({
             icon: 'success',
             mask: true
         });
+    },
+    onUpTap(event) {
+        let newData = this.dbPost.up();
+        this.setData({
+            'post.upStatus': newData.upStatus,
+            'post.upNum': newData.upNum
+        });
     }
 });

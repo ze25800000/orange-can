@@ -37,6 +37,12 @@ class DBPost {
         return this.updatePostData('collect');
     }
 
+    //点赞或者取消点赞
+    up() {
+        let data = this.updatePostData('up');
+        return data;
+    }
+
     updatePostData(category) {
         var itemData    = this.getPostItemById(),
             postData    = itemData.data,
@@ -51,6 +57,14 @@ class DBPost {
                     postData.collectionStatus = false;
                 }
                 break;
+            case 'up':
+                if (!postData.upStatus) {
+                    postData.upNum++;
+                    postData.upStatus = true;
+                } else {
+                    postData.upNum--;
+                    postData.upStatus = false;
+                }
             default:
                 break;
         }
