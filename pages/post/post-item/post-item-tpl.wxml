@@ -1,0 +1,23 @@
+<template name="postItemTpl">
+    <view class="post-container">
+        <view class="post-author-data">
+            <image src="{{avatar}}"/>
+            <text>{{data}}</text>
+        </view>
+        <view class="post-data">
+            <text class="post-title">{{title}}</text>
+            <image mode="aspectFill" class="post-image" src="{{postImg}}"/>
+            <text class="post-content">
+                {{content}}
+            </text>
+        </view>
+        <view class="post-like">
+            <image src="/images/icon/wx_app_collect.png"/>
+            <text>{{collectionNum}}</text>
+            <image src="/images/icon/wx_app_view.png"/>
+            <text>{{readingNum}}</text>
+            <image src="/images/icon/wx_app_message.png"/>
+            <text>{{commentNum}}</text>
+        </view>
+    </view>
+</template>
