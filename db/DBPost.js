@@ -31,6 +31,33 @@ class DBPost {
             }
         }
     }
+
+    //收藏文章
+    collect() {
+        return this.updatePostData('collect');
+    }
+
+    updatePostData(category) {
+        var itemData    = this.getPostItemById(),
+            postData    = itemData.data,
+            allPostData = this.getAllPostData();
+        switch (category) {
+            case 'collect':
+                if (!postData.collectionStatus) {
+                    postData.collectionNum++;
+                    postData.collectionStatus = true;
+                } else {
+                    postData.collectionNum--;
+                    postData.collectionStatus = false;
+                }
+                break;
+            default:
+                break;
+        }
+        allPostData[itemData.index] = postData;
+        this.execSetStorageSync(allPostData);
+        return postData;
+    }
 }
 
 export {DBPost};
