@@ -1,9 +1,11 @@
-var dataObj = require('../../data/data');
+import {DBPost} from "../../db/DBPost"
+
 Page({
     data: {},
-    onLoad: function (options) {
+    onLoad: function () {
+        let dbData = new DBPost();
         this.setData({
-            postList: dataObj.postList
+            postList: dbData.getAllPostData()
         });
     }
 });
