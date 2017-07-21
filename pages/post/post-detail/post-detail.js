@@ -9,5 +9,10 @@ Page({
         this.setData({
             post: this.postData
         });
+    },
+    onReady() {
+        wx.setNavigationBarTitle({
+            title: this.postData.title
+        });
     }
 });
