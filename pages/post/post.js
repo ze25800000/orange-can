@@ -7,5 +7,11 @@ Page({
         this.setData({
             postList: dbData.getAllPostData()
         });
+    },
+    onTapToDetail(event) {
+        let postId = event.currentTarget.dataset.postId;
+        wx.navigateTo({
+            url: 'post-detail/post-detail?id=' + postId
+        });
     }
 });
