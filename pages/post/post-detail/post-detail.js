@@ -36,5 +36,11 @@ Page({
             'post.upStatus': newData.upStatus,
             'post.upNum': newData.upNum
         });
+    },
+    onCommentTap(event) {
+        let id = event.currentTarget.dataset.postId;
+        wx.navigateTo({
+            url: '../post-comment/post-comment?id=' + id
+        });
     }
 });

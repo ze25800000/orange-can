@@ -1,3 +1,5 @@
+let util = require('../utils/util');
+
 class DBPost {
     constructor(postId) {
         this.storageKeyName = 'postList';
@@ -30,6 +32,21 @@ class DBPost {
                 };
             }
         }
+    }
+
+    //获取文章评论数据
+    getCommentData() {
+        let itemData = this.getPostItemById().data;
+        itemData.comments.sort(this.compareWithTime);
+        let len = itemData.comments.length,
+            comment;
+        for (let i = 0; i < len; i++) {
+            //将comment中的时间戳转换成课阅读格式
+            comment = itemData.comments[i];
+
+            comment.create_time = util.getDiffTime(comment.create_time, true);
+        }
+        return itemData.comments;
     }
 
     //收藏文章
@@ -71,6 +88,17 @@ class DBPost {
         allPostData[itemData.index] = postData;
         this.execSetStorageSync(allPostData);
         return postData;
+    }
+
+    compareWithTime(value1, value2) {
+        let flag = parseFloat(value1.create_time) - parseFloat(value2.create_time);
+        if (flag < 0) {
+            return 1;
+        } else if (flag > 0) {
+            return -1;
+        } else {
+            return 0;
+        }
     }
 }
 
