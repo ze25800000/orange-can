@@ -1,7 +1,7 @@
 <view class="comment-detail-box">
     <view class="comment-main-box">
         <view class="comment-title">评论...（共{{comments.length}}条）</view>
-        <block wx:for="{{comments}}" wx:key>
+        <block wx:for="{{comments}}" wx:key wx:for-index="idx">
             <view class="comment-item">
                 <view class="comment-item-header">
                     <view class="left-img">
@@ -25,8 +25,13 @@
                     </view>
                 </view>
                 <view class="comment-img" wx:if="{{item.content.img.length!=0}}">
-                    <block wx:for="{{item.content.img}}" wx:key wx:for-item="img">
-                        <image src="{{img}}" mode="aspectFill"/>
+                    <block wx:for="{{item.content.img}}" wx:key wx:for-item="img" wx:for-index="imgIdx">
+                        <image src="{{img}}"
+                               mode="aspectFill"
+                               catchtap="previewImg"
+                               data-comment-idx="{{idx}}"
+                               data-img-idx="{{imgIdx}}"
+                        />
                     </block>
                 </view>
                 <view class="comment-time">{{item.create_time}}</view>

@@ -10,5 +10,17 @@ Page({
         this.setData({
             comments
         });
+    },
+    //预览图片
+    previewImg(event) {
+        let commentIdx = event.currentTarget.dataset.commentIdx,
+            imgIdx     = event.currentTarget.dataset.imgIdx,
+            imgs       = this.data.comments[commentIdx].content.img;
+        console.log(commentIdx, '---', imgIdx);
+        console.log(imgs);
+        wx.previewImage({
+            current: imgs[imgIdx],
+            urls: imgs
+        })
     }
 });
