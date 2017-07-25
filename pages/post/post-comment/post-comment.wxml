@@ -71,7 +71,7 @@
 
             <!--显示选择的图片-->
             <view class="send-more-result-main" hidden="{{chooseFiles.length==0}}">
-                <block wx:for="{{chooseFiles}}" wx:for-index="idx">
+                <block wx:for="{{chooseFiles}}" wx:key wx:for-index="idx">
 
                     <!--如果删除其中一个，则对其添加deleting 样式；-->
                     <view class="file-box {{deleteIndex==idx?'deleting':''}}">
