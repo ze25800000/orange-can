@@ -83,12 +83,21 @@ Page({
         wx.chooseImage({
             count: leftCount,
             sourceType: sourceType,
-            success(res){
+            success(res) {
                 that.setData({
                     chooseFiles: imgArr.concat(res.tempFilePaths)
                 });
             }
         })
+    },
+    //删除已经选择的照片
+    deleteImage(event) {
+        let index = event.currentTarget.dataset.idx,
+            that  = this;
+        that.data.chooseFiles.splice(index, 1);
+        that.setData({
+            chooseFiles: that.data.chooseFiles
+        });
     },
     //重新渲染并绑定所有评论
     bindCommentData() {
