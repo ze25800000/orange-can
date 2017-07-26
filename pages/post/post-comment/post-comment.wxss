@@ -14,7 +14,7 @@
     bottom: 100rpx;
     right: 0;
     overflow-y: auto;
-    //解决真机卡顿的关键代码
+    /*解决真机卡顿的关键代码*/
     -webkit-overflow-scrolling:touch;
 }
 
