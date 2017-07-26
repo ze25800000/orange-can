@@ -1,5 +1,10 @@
 <view class="container">
     <image class="head-image" src="{{post.postImg}}"></image>
+
+    <image class="music"
+           src="{{isPlayingMusic?'/images/icon/wx_app_music_stop.png':'/images/icon/wx_app_music_start.png'}}"
+           catchtap="onMusicTap"/>
+
     <text class="title">{{post.title}}</text>
     <view class="author-data">
         <view class="author-box">

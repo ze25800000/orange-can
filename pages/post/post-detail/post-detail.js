@@ -1,7 +1,9 @@
 import {DBPost} from "../../../db/DBPost";
 
 Page({
-    data: {},
+    data: {
+        isPlayingMusic: false
+    },
     onLoad: function (options) {
         let postId    = options.id;
         this.dbPost   = new DBPost(postId);
@@ -46,5 +48,11 @@ Page({
     },
     addReadingTimes() {
         this.dbPost.addReadingTimes();
+    },
+    //切换音乐播放图标
+    onMusicTap(event) {
+        this.setData({
+            isPlayingMusic: !this.data.isPlayingMusic
+        });
     }
 });
