@@ -82,6 +82,23 @@ Page({
             });
             app.globalData.g_isPlayingMusic = false;
         });
+        wx.onBackgroundAudioPlay(() => {
+            //只处理当前页面的音乐播放
+            if (app.globalData.g_currentMusicPostId === this.postData.postId) {
+                that.setData({
+                    isPlayingMusic: true
+                });
+            }
+            app.globalData.g_isPlayingMusic = true;
+        });
+        wx.onBackgroundAudioPause(() => {
+            if (app.globalData.g_currentMusicPostId === this.postData.postId) {
+                that.setData({
+                    isPlayingMusic: false
+                });
+            }
+            app.globalData.g_isPlayingMusic = false;
+        });
     },
     initMusicStatus() {
         let currentPostId = this.postData.postId;
