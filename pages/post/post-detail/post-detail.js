@@ -12,6 +12,7 @@ Page({
             post: this.postData
         });
         this.addReadingTimes();
+        this.setMusicMonitor();
     },
     onReady() {
         wx.setNavigationBarTitle({
@@ -72,5 +73,13 @@ Page({
                 isPlayingMusic: true
             });
         }
+    },
+    setMusicMonitor() {
+        let that = this;
+        wx.onBackgroundAudioStop(() => {
+            that.setData({
+                isPlayingMusic: false
+            });
+        });
     }
 });
