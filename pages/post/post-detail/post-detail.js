@@ -1,7 +1,6 @@
 import {DBPost} from "../../../db/DBPost";
 
 var app = getApp();
-console.log(app);
 Page({
     data: {
         isPlayingMusic: false
@@ -21,6 +20,13 @@ Page({
         wx.setNavigationBarTitle({
             title: this.postData.title
         });
+    },
+    onShareAppMessage() {
+        return {
+            title: this.postData.title,
+            desc: this.postData.content,
+            path: "/pages/post/post-detail/post-detail"
+        }
     },
     onCollectionTap(event) {
         let newData = this.dbPost.collect();

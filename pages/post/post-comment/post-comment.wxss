@@ -52,7 +52,7 @@
 
 .comment-item-header .right-user {
     margin-left: 30rpx;
-    line-height: 80rpx;
+    line-height: 0;
 }
 
 .comment-item-header .right-user text {
