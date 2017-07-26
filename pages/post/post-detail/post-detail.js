@@ -9,6 +9,7 @@ Page({
         this.setData({
             post: this.postData
         });
+        this.addReadingTimes();
     },
     onReady() {
         wx.setNavigationBarTitle({
@@ -42,5 +43,8 @@ Page({
         wx.navigateTo({
             url: '../post-comment/post-comment?id=' + id
         });
+    },
+    addReadingTimes() {
+        this.dbPost.addReadingTimes();
     }
 });
