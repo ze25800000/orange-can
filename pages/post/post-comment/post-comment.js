@@ -2,8 +2,14 @@ import {DBPost} from "../../../db/DBPost";
 
 Page({
     data: {
+        //控制使用键盘还是发送音量
         useKeyboardFlag: true,
-        keyboardInputValue: ""
+        //控制input组件的初始值
+        keyboardInputValue: "",
+        //控制是否显示图片选择面板
+        sendMoreMsgFlag: false,
+        //保存已经选择的图片
+        chooseFiles: []
     },
     onLoad: function (options) {
         let postId   = options.id;
@@ -56,6 +62,33 @@ Page({
         this.bindCommentData();
         //恢复初始状态
         this.resetAllDefaultStatus();
+    },
+    //显示选择照片、拍照等按钮
+    sendMoreMsg() {
+        this.setData({
+            sendMoreMsgFlag: !this.data.sendMoreMsgFlag
+        });
+    },
+    //选择本地照片与拍照
+    chooseImage(event) {
+        //已经选择的图片数组
+        let imgArr    = this.data.chooseFiles;
+        //只能上传三张照片，包括拍照
+        let leftCount = 3 - imgArr.length;
+        if (leftCount <= 0) {
+            return;
+        }
+        let sourceType = [event.currentTarget.dataset.category],
+            that       = this;
+        wx.chooseImage({
+            count: leftCount,
+            sourceType: sourceType,
+            success(res){
+                that.setData({
+                    chooseFiles: imgArr.concat(res.tempFilePaths)
+                });
+            }
+        })
     },
     //重新渲染并绑定所有评论
     bindCommentData() {
