@@ -18,6 +18,12 @@ Page({
             title: this.postData.title
         });
     },
+    onUnload() {
+        wx.stopBackgroundAudio();
+        this.setData({
+            isPlayingMusic: false
+        });
+    },
     onCollectionTap(event) {
         let newData = this.dbPost.collect();
         //重新绑定参数，注意不要将整个newData全部作为setData的参数
@@ -51,8 +57,20 @@ Page({
     },
     //切换音乐播放图标
     onMusicTap(event) {
-        this.setData({
-            isPlayingMusic: !this.data.isPlayingMusic
-        });
+        if (this.data.isPlayingMusic) {
+            wx.pauseBackgroundAudio();
+            this.setData({
+                isPlayingMusic: false
+            });
+        } else {
+            wx.playBackgroundAudio({
+                dataUrl: this.postData.music.url,
+                title: this.postData.music.title,
+                coverImgUrl: this.postData.music.coverImg
+            });
+            this.setData({
+                isPlayingMusic: true
+            });
+        }
     }
 });
