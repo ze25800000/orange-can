@@ -9,7 +9,9 @@ Page({
         //控制是否显示图片选择面板
         sendMoreMsgFlag: false,
         //保存已经选择的图片
-        chooseFiles: []
+        chooseFiles: [],
+        //被删除的图片序号
+        deleteIndex: -1
     },
     onLoad: function (options) {
         let postId   = options.id;
@@ -94,10 +96,16 @@ Page({
     deleteImage(event) {
         let index = event.currentTarget.dataset.idx,
             that  = this;
-        that.data.chooseFiles.splice(index, 1);
         that.setData({
-            chooseFiles: that.data.chooseFiles
+            deleteIndex: index
         });
+        that.data.chooseFiles.splice(index, 1);
+        setTimeout(function () {
+            that.setData({
+                deleteIndex: -1,
+                chooseFiles: that.data.chooseFiles
+            });
+        },500);
     },
     //重新渲染并绑定所有评论
     bindCommentData() {
