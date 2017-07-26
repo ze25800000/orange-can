@@ -1,5 +1,7 @@
 import {DBPost} from "../../../db/DBPost";
 
+var app = getApp();
+console.log(app);
 Page({
     data: {
         isPlayingMusic: false
@@ -13,16 +15,11 @@ Page({
         });
         this.addReadingTimes();
         this.setMusicMonitor();
+        this.initMusicStatus();
     },
     onReady() {
         wx.setNavigationBarTitle({
             title: this.postData.title
-        });
-    },
-    onUnload() {
-        wx.stopBackgroundAudio();
-        this.setData({
-            isPlayingMusic: false
         });
     },
     onCollectionTap(event) {
@@ -63,6 +60,7 @@ Page({
             this.setData({
                 isPlayingMusic: false
             });
+            app.globalData.g_isPlayingMusic = false;
         } else {
             wx.playBackgroundAudio({
                 dataUrl: this.postData.music.url,
@@ -72,6 +70,8 @@ Page({
             this.setData({
                 isPlayingMusic: true
             });
+            app.globalData.g_isPlayingMusic     = true;
+            app.globalData.g_currentMusicPostId = this.postData.postId;
         }
     },
     setMusicMonitor() {
@@ -80,6 +80,19 @@ Page({
             that.setData({
                 isPlayingMusic: false
             });
+            app.globalData.g_isPlayingMusic = false;
         });
+    },
+    initMusicStatus() {
+        let currentPostId = this.postData.postId;
+        if (app.globalData.g_isPlayingMusic && app.globalData.g_currentMusicPostId == currentPostId) {
+            this.setData({
+                isPlayingMusic: app.globalData.g_isPlayingMusic
+            });
+        } else {
+            this.setData({
+                isPlayingMusic: false
+            });
+        }
     }
 });
