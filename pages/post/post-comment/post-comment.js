@@ -109,6 +109,59 @@ Page({
             });
         }, 500);
     },
+    //开始录音
+    recordStart() {
+        let that = this;
+        this.setData({
+            recordingClass: 'recording'
+        });
+        //记录录音开始时间
+        this.startTime = new Date();
+        wx.startRecord({
+            success(res) {
+                //计算录音时长
+                let diff = (that.endTime - that.startTime) / 1000;
+                diff     = Math.ceil(diff);
+                //发送录音
+                that.submitVoiceComment({
+                    url: res.tempFilePath, timeLen: diff
+                });
+            },
+            fail(res) {
+                console.log(res);
+            },
+            complete(res) {
+                console.log(res);
+            }
+        });
+    },
+    //提交录音
+    submitVoiceComment(audio) {
+        let newData = {
+            username: "杨泽",
+            avatar: "/images/avatar/avatar-3.png",
+            create_time: new Date().getTime() / 1000,
+            content: {
+                txt: this.data.keyboardInputValue,
+                img: [],
+                audio: audio
+            }
+        };
+        //保存新评论到缓存数据库中
+        this.dbPost.newComment(newData);
+        //显示操作结果
+        this.showCommitSuccessToast();
+        //重新渲染并绑定所有评论
+        this.bindCommentData();
+    },
+    //结束录音
+    recordEnd() {
+        this.setData({
+            recordingClass: ''
+        });
+        this.endTime = new Date();
+        wx.stopRecord();
+    },
     //重新渲染并绑定所有评论
     bindCommentData() {
         let comments = this.dbPost.getCommentData();
