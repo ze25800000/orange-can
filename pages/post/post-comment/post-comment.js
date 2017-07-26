@@ -45,12 +45,14 @@ Page({
     },
     //提交用户评论
     submitComment(event) {
+        let imgs    = this.data.chooseFiles;
         let newData = {
             username: "杨泽",
             avatar: "/images/avatar/avatar-3.png",
             create_time: new Date().getTime() / 1000,
             content: {
-                txt: this.data.keyboardInputValue
+                txt: this.data.keyboardInputValue,
+                img: imgs
             }
         };
         if (!newData.content.txt) {
@@ -105,7 +107,7 @@ Page({
                 deleteIndex: -1,
                 chooseFiles: that.data.chooseFiles
             });
-        },500);
+        }, 500);
     },
     //重新渲染并绑定所有评论
     bindCommentData() {
@@ -126,7 +128,9 @@ Page({
     resetAllDefaultStatus() {
         //清空评论框
         this.setData({
-            keyboardInputValue: ''
+            keyboardInputValue: '',
+            chooseFiles: [],
+            sendMoreMsgFlag: false
         });
     }
 });
