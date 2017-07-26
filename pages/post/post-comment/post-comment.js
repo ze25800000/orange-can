@@ -11,7 +11,9 @@ Page({
         //保存已经选择的图片
         chooseFiles: [],
         //被删除的图片序号
-        deleteIndex: -1
+        deleteIndex: -1,
+        //保存当前正播放语音的URL
+        currentAudio: ''
     },
     onLoad: function (options) {
         let postId   = options.id;
@@ -168,6 +170,25 @@ Page({
         this.setData({
             comments
         });
+    },
+    //暂停和播放
+    playAudio(event) {
+        let url  = event.currentTarget.dataset.url,
+            that = this;
+        //暂停当前录音
+        if (url == this.data.currentAudio) {
+            wx.pauseVoice();
+            this.data.currentAudio = '';
+        } else {
+            this.data.currentAudio = url;
+            wx.playVoice({
+                filePath: url,
+                complete() {
+                    //只有当录音播放完毕后才执行
+                    that.data.currentAudio = '';
+                }
+            });
+        }
     },
     //评论成功
     showCommitSuccessToast() {
