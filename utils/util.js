@@ -30,6 +30,7 @@
         return format;
     };
 })();
+
 function getDiffTime(recordTime, yearsFlag) {
     if (recordTime) {
         recordTime = new Date(parseFloat(recordTime) * 1000);
@@ -75,7 +76,24 @@ function getDiffTime(recordTime, yearsFlag) {
     return '';
 }
 
+function convertToStarsArray(stars) {
+    var num   = stars / 10;
+    var array = [];
+    for (let i = 0; i < 5; i++) {
+        if (i < num) {
+            array.push(1);
+        } else {
+            if ((i - num) == 0.5) {
+                array.push(0.5);
+            } else {
+                array.push(0);
+            }
+        }
+    }
+    return array;
+}
 
 module.exports = {
-    getDiffTime
+    getDiffTime,
+    convertToStarsArray
 };

@@ -1,32 +1,40 @@
 @import "../single-movie/single-movie.wxss";
+
 .movie-list-container {
-    background-color: #ffffff;
-    display: flex;
-    flex-direction: column;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
 }
-.inner-container {
-    margin: 0 auto 20rpx;
+
+.inner-container{
+    margin: 0  auto 20rpx;
 }
+
 .movie-head {
-    padding: 30rpx 20rpx 22rpx;
+  padding: 30rpx 20rpx 22rpx;
 }
+
 .slogan {
-    font-size: 24px;
+  font-size: 24rpx;
 }
+
 .more {
-    float: right;
+  float: right;
 }
+
 .more-text {
-    vertical-align: middle;
-    margin-right: 10rpx;
-    color: #4a6141;
+  vertical-align: middle;
+  margin-right: 10rpx;
+  color: #4A6141;
 }
+
 .more-img {
-    width: 9rpx;
-    height: 16rpx;
-    vertical-align: middle;
+  width: 9rpx;
+  height: 16rpx;
+  vertical-align: middle;
 }
-.movie-container {
-    display: flex;
+
+.movies-container{
+    display:flex;
     flex-direction: row;
 }

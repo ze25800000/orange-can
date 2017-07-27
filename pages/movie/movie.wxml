@@ -1,4 +1,4 @@
-<import src="movie-list/movie-list-tpl.wxml"></import>
+<import src="movie-list-tpl/movie-list-tpl.wxml"></import>
 <view class="container">
     <view class="movies-template">
         <template is="movieListTpl" data="{{...inTheaters}}"></template>
