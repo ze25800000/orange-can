@@ -18,6 +18,7 @@ Page({
                 dataUrl = app.globalData.doubanBase + "/v2/movie/top250";
                 break;
         }
+        this.data.requestUrl = dataUrl;
         util.http(dataUrl, this.processDoubanData);
     },
     processDoubanData(moviesDouban) {
@@ -41,5 +42,10 @@ Page({
         this.setData({
             movies
         });
+        wx.stopPullDownRefresh();
+    },
+    onPullDownRefresh(event) {
+        let refreshUrl = this.data.requestUrl + "?start=0&count=20";
+        util.http(refreshUrl, this.processDoubanData);
     }
 });
