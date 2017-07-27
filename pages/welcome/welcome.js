@@ -4,8 +4,8 @@ Page({
 
     },
     onTapJump(event) {
-        wx.redirectTo({
-            url: '../post/post'
+        wx.switchTab({
+          url: '../post/post',
         });
     }
 });
