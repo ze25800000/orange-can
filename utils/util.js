@@ -93,7 +93,24 @@ function convertToStarsArray(stars) {
     return array;
 }
 
+function http(url, callBack) {
+    wx.request({
+        url: url,
+        method: 'GET',
+        header: {
+            "content-type": "json"
+        },
+        success(res) {
+            callBack(res.data);
+        },
+        fail(error) {
+            callBack(error);
+        }
+    })
+}
+
 module.exports = {
     getDiffTime,
-    convertToStarsArray
+    convertToStarsArray,
+    http
 };

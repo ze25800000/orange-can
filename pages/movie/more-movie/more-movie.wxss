@@ -1,1 +1,1 @@
-/* more-movie.wxss */
+@import "../movie-grid-tpl/movie-grid-tpl.wxss";
