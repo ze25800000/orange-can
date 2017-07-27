@@ -39,13 +39,23 @@ Page({
             };
             movies.push(temp);
         }
+        let totalMovies = [];
+        totalMovies     = this.data.movies.concat(movies);
         this.setData({
-            movies
+            movies: totalMovies
         });
         wx.stopPullDownRefresh();
     },
     onPullDownRefresh(event) {
         let refreshUrl = this.data.requestUrl + "?start=0&count=20";
+        //刷新页面后将后面所有初始化参数恢复到初始值
+        this.data.movies = [];
         util.http(refreshUrl, this.processDoubanData);
+    },
+    onReachBottom(event) {
+        let totalCount = this.data.movies.length;
+        //拼接下一组数据的URL
+        let nextUrl    = this.data.requestUrl + "?start=" + totalCount + "&count=20";
+        util.http(nextUrl, this.processDoubanData);
     }
 });
