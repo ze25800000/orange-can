@@ -2,11 +2,12 @@ let util = require('../../utils/util');
 let app  = getApp();
 Page({
     data: {
-        data: {
-            inTheaters: {},
-            comingSoon: {},
-            top250: {}
-        }
+        inTheaters: {},
+        comingSoon: {},
+        top250: {},
+        containerShow: true,
+        searchPanelShow: false,
+        searchResult: {}
     },
 
     onLoad: function (options) {
@@ -64,5 +65,24 @@ Page({
         wx.navigateTo({
             url: 'more-movie/more-movie?category=' + category
         });
+    },
+    onBindFocus(event) {
+        this.setData({
+            containerShow: false,
+            searchPanelShow: true
+        });
+    },
+    onCancelImgTap(event) {
+        this.setData({
+            containerShow: true,
+            searchPanelShow: false,
+            searchResult: {},
+            inputValue: ''
+        });
+    },
+    onBindConfirm(event) {
+        let keyWord   = event.detail.value;
+        let searchUrl = app.globalData.doubanBase + "/v2/movie/search?q=" + keyWord;
+        this.getMovieListData(searchUrl, "searchResult", "");
     }
 });
