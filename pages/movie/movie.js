@@ -58,5 +58,11 @@ Page({
             movies: movies
         };
         this.setData(readyData);
+    },
+    onMoreTap(event) {
+        let category = event.currentTarget.dataset.category;
+        wx.navigateTo({
+            url: 'more-movie/more-movie?category=' + category
+        });
     }
 });
