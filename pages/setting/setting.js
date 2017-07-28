@@ -154,4 +154,73 @@ Page({
             compassHidden: true
         });
     },
+    //摇一摇
+    shake: function () {
+        var that = this;
+        //启用摇一摇
+        this.gravityModalConfirm(true);
+
+        wx.onAccelerometerChange(function (res) {
+            //摇一摇核心代码，判断手机晃动幅度
+            var x     = res.x.toFixed(4),
+                y     = res.y.toFixed(4),
+                z     = res.z.toFixed(4);
+            var flagX = that.getDelFlag(x, that.data.shakeData.x),
+                flagY = that.getDelFlag(y, that.data.shakeData.y),
+                flagZ = that.getDelFlag(z, that.data.shakeData.z);
+
+            that.data.shakeData = {
+                x: res.x.toFixed(4),
+                y: res.y.toFixed(4),
+                z: res.z.toFixed(4)
+            };
+            if (flagX && flagY || flagX && flagZ || flagY && flagZ) {
+                // 如果摇一摇幅度足够大，则认为摇一摇成功
+                if (that.data.shakeInfo.enabled) {
+                    that.data.shakeInfo.enabled = false;
+                    that.playShakeAudio();
+                }
+            }
+        });
+    },
+
+    //启用或者停用摇一摇功能
+    gravityModalConfirm: function (flag) {
+        if (flag !== true) {
+            flag = false;
+        }
+        var that = this;
+        this.setData({
+            shakeInfo: {
+                gravityModalHidden: !that.data.shakeInfo.gravityModalHidden,
+                num: 0,
+                enabled: flag
+            }
+        })
+    },
+
+    //计算摇一摇的偏移量
+    getDelFlag: function (val1, val2) {
+        return (Math.abs(val1 - val2) >= 1);
+    },
+
+    // 摇一摇成功后播放声音并累加摇一摇次数
+    playShakeAudio: function () {
+        var that = this;
+        wx.playBackgroundAudio({
+            dataUrl: 'http://7xqnxu.com1.z0.glb.clouddn.com/wx_app_shake.mp3',
+            title: '',
+            coverImgUrl: ''
+        });
+        wx.onBackgroundAudioStop(function () {
+            that.data.shakeInfo.num++;
+            that.setData({
+                shakeInfo: {
+                    num: that.data.shakeInfo.num,
+                    enabled: true,
+                    gravityModalHidden: false
+                }
+            });
+        });
+    },
 });
