@@ -124,7 +124,7 @@ function convertToCastInfos(casts) {
         var cast = {
             img: casts[idx].avatars ? casts[idx].avatars.large : "",
             name: casts[idx].name
-        }
+        };
         castsArray.push(cast);
     }
     return castsArray;
