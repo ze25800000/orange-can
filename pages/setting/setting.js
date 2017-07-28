@@ -79,5 +79,15 @@ Page({
                 }
             });
         })
+    },
+    //获取网络状态
+    showNetWork() {
+        let that = this;
+        wx.getNetworkType({
+            success(res) {
+                let networkType = res.networkType;
+                that.showModal('网络状态', '您当前的网络：' + networkType)
+            }
+        })
     }
 });
