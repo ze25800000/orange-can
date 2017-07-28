@@ -88,6 +88,30 @@ Page({
                 let networkType = res.networkType;
                 that.showModal('网络状态', '您当前的网络：' + networkType)
             }
-        })
-    }
+        });
+    },
+    //获取当前位置经纬度和速度
+    getLonLat(callback) {
+        let that = this;
+        wx.getLocation({
+            type: 'gcj02',
+            success: res => {
+                callback(res.longitude, res.latitude, res.speed);
+            }
+        });
+    },
+    //显示当前位置坐标与当前速度
+    showLonLat: function () {
+        var that = this;
+        this.getLonLat(function (lon, lat, speed) {
+            var lonStr = lon >= 0 ? '东经' : '西经',
+                latStr = lat >= 0 ? '北纬' : '南纬';
+            lon = lon.toFixed(2);
+            lat = lat.toFixed(2);
+            lonStr += lon;
+            latStr += lat;
+            speed = (speed || 0).toFixed(2);
+            that.showModal('当前位置和速度', '当前位置：' + lonStr + ',' + latStr + '。速度:' + speed + 'm/s');
+        });
+    },
 });
