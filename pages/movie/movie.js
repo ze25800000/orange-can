@@ -84,5 +84,11 @@ Page({
         let keyWord   = event.detail.value;
         let searchUrl = app.globalData.doubanBase + "/v2/movie/search?q=" + keyWord;
         this.getMovieListData(searchUrl, "searchResult", "");
+    },
+    onMovieTap(event) {
+        let movieId = event.currentTarget.dataset.movieId;
+        wx.navigateTo({
+            url: "movie-detail/movie-detail?id=" + movieId
+        });
     }
 });

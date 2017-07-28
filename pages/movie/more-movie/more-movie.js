@@ -64,5 +64,11 @@ Page({
         let nextUrl    = this.data.requestUrl + "?start=" + totalCount + "&count=20";
         util.http(nextUrl, this.processDoubanData);
         wx.showNavigationBarLoading();
+    },
+    onMovieTap(event) {
+        let movieId = event.currentTarget.dataset.movieId;
+        wx.navigateTo({
+            url: "../movie-detail/movie-detail?id=" + movieId
+        });
     }
 });
