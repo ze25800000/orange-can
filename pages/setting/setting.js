@@ -223,4 +223,17 @@ Page({
             });
         });
     },
+    //扫码
+    scanQRCode() {
+        let that = this;
+        wx.scanCode({
+            success(res) {
+                console.log(res);
+                that.showModal('扫描二维码/条形码', res.result, false);
+            },
+            fail(){
+                that.showModal('扫描二维码/条形码', "扫码失败", false)
+            }
+        })
+    }
 });
