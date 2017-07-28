@@ -106,12 +106,52 @@ Page({
         this.getLonLat(function (lon, lat, speed) {
             var lonStr = lon >= 0 ? '东经' : '西经',
                 latStr = lat >= 0 ? '北纬' : '南纬';
-            lon = lon.toFixed(2);
-            lat = lat.toFixed(2);
+            lon        = lon.toFixed(2);
+            lat        = lat.toFixed(2);
             lonStr += lon;
             latStr += lat;
-            speed = (speed || 0).toFixed(2);
+            speed      = (speed || 0).toFixed(2);
             that.showModal('当前位置和速度', '当前位置：' + lonStr + ',' + latStr + '。速度:' + speed + 'm/s');
+        });
+    },
+    //在地图上显示当前位置
+    showMap() {
+        this.getLonLat((lon, lat) => {
+            wx.openLocation({
+                latitude: lat,
+                longitude: lon,
+                scale: 15,
+                name: '海底捞',
+                address: "xx街xx号",
+                fail() {
+                    wx.showToast({
+                        title: '地图打开失败',
+                        duration: 1000,
+                        icon: "cancel"
+                    })
+                }
+            })
+        })
+    },
+
+    //显示罗盘
+    showCompass: function () {
+        var that = this;
+        this.setData({
+            compassHidden: false
+        });
+        wx.onCompassChange(function (res) {
+            console.log(res);
+            if (!that.data.compassHidden) {
+                that.setData({compassVal: res.direction.toFixed(2)});
+            }
+        });
+    },
+
+    //隐藏罗盘
+    hideCompass: function () {
+        this.setData({
+            compassHidden: true
         });
     },
 });
