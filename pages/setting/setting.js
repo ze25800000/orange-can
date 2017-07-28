@@ -56,6 +56,12 @@ Page({
             }
         })
     },
+    //显示系统信息
+    showSystemInfo: function () {
+        wx.navigateTo({
+            url: 'device/device'
+        });
+    },
     //缓存清理
     clearCache() {
         this.showModal('缓存清楚', '确定要清楚本地缓存么？', function () {
