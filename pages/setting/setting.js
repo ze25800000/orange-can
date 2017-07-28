@@ -235,5 +235,11 @@ Page({
                 that.showModal('扫描二维码/条形码', "扫码失败", false)
             }
         })
+    },
+    //用户登录
+    login(){
+        wx.navigateTo({
+            url: '/pages/setting/open-api/login/login'
+        });
     }
 });
