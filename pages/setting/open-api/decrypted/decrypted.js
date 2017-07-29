@@ -1,26 +1,25 @@
-// pages/setting/open-api/check/check.js
 Page({
+
     data: {},
     onTap() {
         wx.login({
             success(loginRes) {
                 wx.getUserInfo({
                     success: userRes => {
-                        console.log(userRes);
                         wx.request({
-                            url: "http://orangecan.cn/wxCheckUserInfo.php",
+                            url: "http://orangecan.cn/wxDecryptUserInfo.php",
                             data: {
                                 code: loginRes.code,
-                                signature: userRes.signature,
-                                rawData: userRes.rawData
+                                encryptedData: userRes.encryptedData,
+                                iv: userRes.iv
                             },
                             success: res => {
                                 console.log(res.data);
                             }
-                        })
+                        });
                     }
-                })
+                });
             }
-        })
+        });
     }
 });

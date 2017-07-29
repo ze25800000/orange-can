@@ -10,7 +10,8 @@
     "pages/setting/setting",
     "pages/setting/device/device",
     "pages/setting/open-api/login/login",
-    "pages/setting/open-api/check/check"
+    "pages/setting/open-api/check/check",
+    "pages/setting/open-api/decrypted/decrypted"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -247,5 +247,11 @@ Page({
         wx.navigateTo({
             url: '/pages/setting/open-api/check/check'
         });
+    },
+    //解析用户解密数据
+    decrypted(){
+        wx.navigateTo({
+            url: '/pages/setting/open-api/decrypted/decrypted'
+        });
     }
 });
