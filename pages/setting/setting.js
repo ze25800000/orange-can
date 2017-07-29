@@ -241,5 +241,11 @@ Page({
         wx.navigateTo({
             url: '/pages/setting/open-api/login/login'
         });
+    },
+    //用户信息校验
+    check(){
+        wx.navigateTo({
+            url: '/pages/setting/open-api/check/check'
+        });
     }
 });
